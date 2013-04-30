@@ -1,9 +1,57 @@
-.container {
-  margin: 20px auto;
-  width: 600px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
+body {
+  margin: 0px;
 }
-th {
-  text-align: left;
+
+.container {
+  margin: 100px auto;
+  width: 55%;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.racer_table td {
+  background-color: white;
+  height: 20px;
+  width: 20px;
+}
+
+#player1_strip td.active {
+  background-color: red;  
+}
+
+#player2_strip td.active {
+  background-color: blue;  
+}
+
+#player3_strip td.active {
+  background-color: green;  
+}
+
+#player4_strip td.active {
+  background-color: yellow;  
+}
+
+#player5_strip td.active {
+  background-color: orange;
+}
+
+#player6_strip td.active {
+  background-color: purple;
+}
+
+#player7_strip td.active {
+  background-color: gray;
+}
+
+#player8_strip td.active {
+  background-color: pink;
+}
+
+#player9_strip td.active {
+  background-color: aqua;
+}
+
+td.name {
+ background-color: black;
+ color: white; 
 }

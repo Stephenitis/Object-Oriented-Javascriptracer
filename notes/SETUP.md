@@ -1,3 +1,5 @@
+rerun rackup # view output
+shotgun
 ------------------------------------------------
 Bash
 - ps auxww | grep ruby
