@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-  margin: 100px auto;
+  margin: 20px auto;
   width: 55%;
   background-color: rgba(0, 0, 0, 0.1);
   padding: 10px;
@@ -54,4 +54,9 @@ body {
 td.name {
  background-color: black;
  color: white; 
+}
+
+h1 {
+  text-align: center;
+  margin: 0 auto;
 }

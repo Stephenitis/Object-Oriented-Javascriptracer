@@ -1,10 +1,6 @@
-<div class="container">
-
-  <h1>The winner was <b><%= @winner.name %></b></h1>
-  <p>Your game took <%= @game.time_elapsed %> seconds</p>
-  <p>See this result again:
-  <a href='/game/<%= @game.url %>'><%= @game.url %></a>
-  </p>
-  <a href='/'>Play Again?</a>
-
-</div>
+<h2>The winner was <b><%= @winner.name %></b></h2>
+<p>Your game took <%= @game.time_elapsed %> seconds</p>
+<p>See this result again:
+<a href='/game/<%= @game.id%>'>/game/<%= @game.id %></a>
+</p>
+<a href='/'>Play Again?</a>

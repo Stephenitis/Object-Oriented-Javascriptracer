@@ -12,20 +12,31 @@ post '/play' do
 end
 
 post '/record_winner/:id' do
+
   puts "These are the params for /record_winner #{params}"
-  Game.last.update_attributes({'winner_id' => params[:id]})
+  @winner = Player.find(params[:id])
+  @game = @winner.games.last
+  @game.update_attributes({'winner_id' => params[:id]})
+  
+  erb :finished, :layout => false
+  # {
+  #   :game => game,
+  #   :player1 => game.players[0].name,
+  #   :player2 => game.players[1].name,
+  #   :winner => Player.find(game.winner_id).name,
+  #   }.to_json
 end
 
-get '/finished' do
-  puts "These are the params for /finished #{params}"
-  @game = Game.last
-  @game.create_url
-  @winner = Player.find(@game.winner_id)
-  erb :finished
-end
+# get '/finished' do
+#   puts "These are the params for /finished #{params}"
+#   @game = Game.last
+#   @game.create_url
+#   @winner = Player.find(@game.winner_id)
+#   erb :finished
+# end
 
-get '/game/:url' do
-  @game = Game.find_by_url(params[:url])
+get '/game/:id' do
+  @game = Game.find(params[:id])
   @winner = Player.find(@game.winner_id)
   erb :finished
 end

@@ -1,22 +1,28 @@
 function playerForward(player) {
-  var current_active = $('#' + player + '_strip').find($('.active'))
-  current_active.next().addClass('active')
-  current_active.removeClass('active')
-};
+  var current_active = $('#' + player + '_strip').find($('.active'));
+  current_active.next().addClass('active');
+  current_active.removeClass('active');
+}
 
 function playerWin(player) {
   if ($('#' + player + '_strip').children().last().attr('class') == 'active') {
     player_winner = $('#' + player + '_strip').children().first().text();
     player_id = $('#' + player).attr('data-player-id');
     alert(player_winner + ' has won!');
+    
     $.ajax({
       type: "POST",
       url: "/record_winner/" + player_id
+    }).done(function(response){
+      console.log(response);
+      $("#racer-div").html(response);
+      // var gameID = response.game.game.id;
+      // console.log(gameID);
     });
 
-    window.location.assign('/finished');
+    // window.location.assign('/finished');
   }
-};
+}
 
 function createBoard(num_of_players, track_length) {
   table = $('table');
@@ -24,21 +30,21 @@ function createBoard(num_of_players, track_length) {
     player_name = $('#player' + i).attr('value');
     table.append('<tr></tr>');
 
-    row = table.find('tr').last() 
+    row = table.find('tr').last() ;
     row.attr('id', 'player' + i + '_strip');
     for (var j = 0; j < track_length + 1; j ++) {
       row.append('<td></td>');
-      cell = row.find('td').last() 
-      cell.text((j)) // this line and the previous add the numbers
-    };
-    first_cell = row.find('td').first()
+      cell = row.find('td').last();
+      cell.text((j));
+    }
+    first_cell = row.find('td').first();
     first_cell.next().addClass('active');
     first_cell.addClass('name').text(player_name);
-  };
-};
+  }
+}
 
 $(document).ready(function() {
-  num_of_players = 2
+  num_of_players = 2;
   createBoard(num_of_players, 15);
   $(this).keyup(function(event){ 
     for (var k = 1; k < (num_of_players + 1); k ++) {
@@ -46,7 +52,7 @@ $(document).ready(function() {
         playerForward('player' + k);
         playerWin('player' + k);
       }      
-    };
+    }
   });
 
 });
