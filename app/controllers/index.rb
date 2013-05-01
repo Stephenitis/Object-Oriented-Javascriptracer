@@ -48,7 +48,7 @@ end
 post '/results' do
   puts params
   @winner, @loser = Player.find_or_create_by_name(params[:winner]), Player.find_or_create_by_name(params[:loser])
-  @game = Game.create
+  @game = Game.create(:winner_id => @winner.id)
   @game.players << [@winner, @loser]
-  @game.update_attributes({'winner_id' => @winner.id})
+  puts "hello"
 end

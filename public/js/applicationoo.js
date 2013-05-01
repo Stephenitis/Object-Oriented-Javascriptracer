@@ -15,13 +15,15 @@ function Game(player1, player2) {
 Game.prototype = {
   finishGame: function(){
     $(document).unbind('keyup');
+    var z = new Date();
+    this.timeElapsed = z.getTime() - startTime;
     alert(this.winner.name + ' has won!');
   },
   send: function(game){
     $.ajax({
       method: 'post',
       url: '/results',
-      data: { winner: game.winner.name, loser: game.loser.name }
+      data: { winner: game.winner.name, loser: game.loser.name, time_elapsed: game.timeElapsed }
     });
   },
   findWinner: function(){
@@ -67,13 +69,17 @@ Board.prototype = {
 };
 
 $(document).ready(function() {
-  player1 = new Player('Jim');
-  player2 = new Player('Anne');
+  var player1 = new Player('Jim');
+  var player2 = new Player('Anne');
 
-  game = new Game(player1, player2);
+  var game = new Game(player1, player2);
 
-  board = new Board();
+  var board = new Board();
   board.createBoard();
+
+  alert('Click Ok to start the game!');
+  var d = new Date();
+  startTime = d.getTime();
 
   $(document).on('keyup', function(event) {
     game.onKeyUp(event.which);
@@ -85,4 +91,8 @@ $(document).ready(function() {
     }
   });  
 });
+
+
+
+
 
