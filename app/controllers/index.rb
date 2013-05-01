@@ -40,3 +40,15 @@ get '/game/:id' do
   @winner = Player.find(@game.winner_id)
   erb :finished
 end
+
+get '/dummy' do
+  erb :dummy, :layout => false
+end
+
+post '/results' do
+  puts params
+  @winner, @loser = Player.find_or_create_by_name(params[:winner]), Player.find_or_create_by_name(params[:loser])
+  @game = Game.create
+  @game.players << [@winner, @loser]
+  @game.update_attributes({'winner_id' => @winner.id})
+end
