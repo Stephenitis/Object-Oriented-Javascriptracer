@@ -1,5 +1,5 @@
 <h2>The winner was <b><%= @winner.name %></b></h2>
-<p>Your game took <%= @game.time_elapsed %> seconds</p>
+<p>Your game took <%= (@game.time_elapsed/1000.to_f) %> seconds</p>
 <p>See this result again:
 <a href='/game/<%= @game.id%>'>/game/<%= @game.id %></a>
 </p>

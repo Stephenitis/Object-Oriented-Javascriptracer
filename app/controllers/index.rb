@@ -4,11 +4,12 @@ get '/' do
 end
 
 post '/play' do
+  p params
   @game = Game.create
   @player1 =  Player.find_or_create_by_name(params[:player1])
   @player2 =  Player.find_or_create_by_name(params[:player2])
   @game.players << [@player1, @player2]
-  erb :play
+  erb :dummy, :layout => false
 end
 
 post '/record_winner/:id' do
@@ -41,14 +42,15 @@ get '/game/:id' do
   erb :finished
 end
 
-get '/dummy' do
-  erb :dummy, :layout => false
-end
+# get '/dummy' do
+#   erb :dummy, :layout => false
+# end
 
 post '/results' do
+  content_type :json
   puts params
   @winner, @loser = Player.find_or_create_by_name(params[:winner]), Player.find_or_create_by_name(params[:loser])
-  @game = Game.create(:winner_id => @winner.id)
+  @game = Game.create(:winner_id => @winner.id, :time_elapsed => params[:time_elapsed])
   @game.players << [@winner, @loser]
-  puts "hello"
+  @game.to_json
 end
